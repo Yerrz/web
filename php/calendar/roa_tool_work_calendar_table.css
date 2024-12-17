@@ -1,0 +1,665 @@
+body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+    min-width: 1200px;
+
+    background-color: #F5F5F5;
+}
+
+table, tr, td, th {
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+
+a:hover {
+    text-decoration: none;
+}
+
+#calendar {
+    margin: 0 auto;
+    width: 1400px;
+}
+
+.fc {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.fc .fc-button {
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.1;
+    padding: 0.4em 0.65em;
+    text-align: center;
+    user-select: none;
+    vertical-align: middle;
+}
+
+.fc .fc-button .fc-icon {
+    vertical-align: middle;
+}
+
+.fc .fc-button-premonth,.fc .fc-button-nextmonth {
+    padding: 0.4em;
+}
+
+.fc .fc-icon {
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    height: 1em;
+    line-height: 1;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    width: 1em;
+    font-family: fcicons !important;
+}
+
+.fc .fc-button-primary {
+    background: -webkit-linear-gradient(top, #fff, #e0e0e0);
+    color: #494949;
+    border: 1px solid #BEBEBE;
+    cursor: pointer;
+}
+
+.fc .fc-button-primary:hover {
+    border: 1px solid #494949;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+    box-shadow: none;
+    background: -webkit-linear-gradient(top, #494949, #919191);
+    color: #fff !important;
+}
+
+.fc .fc-button-primary:disabled {
+    border-color: #BEBEBE;
+    cursor: default;
+    color: #494949;
+}
+
+.fc-button-active {
+    background: -webkit-linear-gradient(top, #494949, #919191) !important;
+    color: #fff !important;
+}
+
+.fc .fc-header-toolbar {
+    margin-bottom: 1.5em;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fc-header-toolbar .fc-header-toolbar-title {
+    padding: 0 10px;
+}
+
+.fc-header-toolbar .fc-button-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    vertical-align: middle;
+}
+
+.fc-header-toolbar .fc-button-group>.fc-button:not(:first-child) {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-left: none;
+}
+
+.fc-header-toolbar .fc-button-group>.fc-button:not(:last-child) {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.fc-header-toolbar .fc-button:not(:disabled) {
+    cursor: pointer;
+}
+
+.fc-header-toolbar .fc-icon-premonth::before {
+    content: "<";
+}
+
+.fc-header-toolbar .fc-icon-nextmonth::before {
+    content: ">";
+}
+
+.fc-toolbar-chunk h2 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.fc .fc-view {
+    flex-grow: 1;
+    position: relative;
+}
+
+.fc .fc-dayGridMonth-view {
+    inset: 0;
+    margin-bottom: 10px;
+}
+
+.fc table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    table-layout: fixed;
+}
+
+.fc .fc-table {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+.fc-table tbody>tr {
+    height: 137px;
+}
+
+.fc-table td,
+.fc-table th {
+    border: 1px solid #ddd;
+}
+.fc-table th {
+    font-size: 14px;
+    color: #fff;
+    line-height: 24px;
+}
+
+/* 日历表格 */
+.fc .fc-day {
+    min-height: 100%;
+    position: relative;
+    padding: 0px;
+    vertical-align: top;
+}
+
+.fc .fc-day-others {
+    pointer-events: none;/* 禁止鼠标点击事件 */
+}
+
+.fc .fc-day-today {
+}
+
+.fc .fc-day-selected {
+    border: 2px solid lightblue;/* 添加一个蓝色实线边框 */
+    box-shadow: 0 0 10px lightblue;/* 设置发光效果 */
+}
+
+.fc-day .fc-day-number:hover {
+    color: #333;
+}
+
+.fc-day .fc-day-top-today {
+    background: -webkit-linear-gradient(top, #cc0000, #f35353) !important;
+}
+.fc-day-top-today .fc-day-number{
+    color: #fff;
+}
+.fc-day-top-today .fc-day-number:hover {
+    color: #fff;
+}
+
+.fc .fc-day-top {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.fc .fc-day-number,
+.fc .fc-day-festival {
+    display: inline-block;
+    padding: 2px 4px;
+    text-align: center;
+}
+
+.fc .fc-day-festival {
+    color: #b2b7bf;
+}
+
+.fc-day .fc-day-events {
+    left: 0px;
+    position: absolute;
+    right: 0px;
+    margin-top: 1px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.fc-day:hover {
+    text-decoration: none;
+}
+
+.fc-day-events .fc-event {
+    position: relative;
+    padding: 1px 0px;
+    margin: 0 2px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.fc-day-events .fc-day-events-main {
+    color: #fff;
+    background-color: #3788d8;
+    border: 1px solid #3788d8;
+    margin-bottom: 2px;
+}
+.fc-day-events .fc-day-events-calendar {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    position: relative;
+}
+.fc-table .fc-day-box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    bottom: 0px;
+    position: absolute;
+}
+.fc-table .fc-day-events-calendar-more {
+    position: absolute;
+    width: 100%;
+    bottom: 1px;
+    cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+    background-color: #fff;
+    z-index: 3;
+}
+.fc-table .fc-day-box-overflow-border-selected {
+    width: 110%;
+    height: auto;
+    min-height: 120%;
+    max-height: 190%;
+    top: -10px;
+    left: -10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background-color: #fff;
+    border: 1px solid #93d4fc;
+    box-shadow: 0 0 5px #60caff;
+    z-index: 4;
+}
+.fc-table tr td:nth-child(6), td:nth-child(7){
+    background: hsla(0, 0%, 82%, .3);
+}
+
+.fc-table .row{
+    background: -webkit-linear-gradient(top, #494949, #919191) !important;
+}
+
+
+/* 日程信息悬浮框 */
+.fc .fc-day-events-calendar-detailDiv {
+    max-width: 530px;
+    position: fixed;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    z-index: 99;
+    display: none;
+    border: solid 1px #b4b4b4;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+.fc-table-list .fc-day-events-calendar-detailDiv {
+    position: absolute;
+}
+
+.fc-day-events-calendar-detailDiv ul.field {
+    display: flex;
+    padding: 2px 0;
+}
+
+.fc-day-events-calendar-detailDiv li.title {
+    min-width: 30px;
+    padding-right: 5px;
+    color: gray;
+}
+
+.fc-day-events-calendar-detailDiv li.data {
+    min-width: 260px;
+    max-width: 450px;
+    max-height: 300px;
+}
+
+.fc-day-events-calendar-detailDiv a {
+    font-size: 14px;
+}
+
+.fc-day-events-calendar-detailDiv .detailDiv-subject a {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 日程栏点击框 */
+/* 日程信息悬浮框-带编辑面板 */
+.fc-day-events-calendar-detailEditDiv {
+    width: 530px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    display: none;
+    border: solid 1px #b4b4b4;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+}
+.fc-day-events-calendar-detailDiv2 {
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 400px;
+}
+.fc-day-events-calendar-detailDiv2 ul.field {
+    display: flex;
+    padding: 2px 0;
+}
+.fc-day-events-calendar-detailDiv2 li.title {
+    min-width: 30px;
+    padding-right: 5px;
+    color: gray;
+}
+.fc-day-events-calendar-detailDiv2 li.data {
+    min-width: 260px;
+    max-width: 450px;
+}
+.fc-day-events-calendar-detailDiv2 a {
+    font-size: 14px;
+}
+.fc-day-events-calendar-detailDiv2 .detailDiv-subject a {
+    font-size: 16px;
+    font-weight: bold;
+}
+.fc-day-events-calendar-editbutton {
+    padding: 10px;
+    border-top: 1px solid #cccccc;
+}
+.fc-day-events-calendar-editbutton .fc-day-events-editbtn,
+.fc-day-events-calendar-editbutton .fc-day-events-exitbtn {
+    float: right;
+    margin-right: .5em;
+}
+.fc-day-events-calendar-editbutton .fc-day-events-delbtn {
+    color: #c00;
+}
+.ui-button-text-only .ui-button-text {
+    padding: .2em .9em;
+}
+
+
+
+.fc-day-events .fc-day-events-calendar:hover {
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.fc-day-events .fc-day-events-calendar-nRemind {
+    color: #c00;
+}
+
+.fc-day-events .fc-day-events-calendar-nRemind:hover {
+    color: #c00;
+}
+
+.fc-day-events .fc-day-events-calendar-more:hover {
+    background-color: #fff;
+    color: #333;
+    cursor: default;
+}
+
+.fc .fc-day-events-calendar-dot {
+    border: 4px solid #adaeaf;
+    border-radius: 4px;
+    box-sizing: content-box;
+    height: 0px;
+    margin: 0px 4px;
+    width: 0px;
+}
+
+.fc-day-events-calendar .fc-day-events-calendar-time {
+    margin-right: 3px;
+}
+
+.fc-day-events-calendar .fc-day-events-calendar-title {
+    flex-grow: 1;
+    flex-shrink: 1;
+    font-weight: 700;
+    min-width: 0px;
+    overflow: hidden;
+}
+
+/* 新建日程对话框 */
+#div_chg_addEvent .input_event {
+    width: 413px;
+    border: 1px solid #b3b3b3;
+    box-shadow: inset 1px 1px 0 #e2e2e2;
+    background-color: #fff;
+    padding: 3px;
+    outline: none
+}
+#div_chg_addEvent #reg ul.h li.input {
+    width: 420px;
+}
+.nRemindCustomize, .sRepeatSection {
+    display: none;
+}
+.inputResult {
+    font-size: 12px;
+}
+.textOmit {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.textWrap {
+    text-wrap: wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+.textOmitWrap{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/* 列表页面 */
+.fc .fc-table-list-box {
+    width: calc(100% - 260px);
+    height: 100%;
+    border: 1px solid #ddd;
+    overflow: auto;
+    position: absolute;
+    left: 260px;
+}
+.fc .fc-table-list {
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+}
+
+.fc .fc-table-list a:hover {
+    color: #333;
+}
+
+.fc-table-list .fc-list-subject,.fc-table-list .fc-list-time:hover {
+    cursor: pointer;
+}
+
+.fc .fc-table-list a {
+    text-decoration: none;
+}
+
+.fc-table-list th {
+    background-color: hsla(0, 0%, 82%, .3);
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    padding: 8px 14px;
+    text-align: left;
+}
+.fc-table-list td {
+    padding: 4px;
+}
+.fc-table-list .fc-list-events-title {
+    width: 100px;
+    text-align: left;
+}
+.fc-table-list td.fc-list-event-time {
+    width: 65px;
+    text-align: center;
+    vertical-align: text-top;
+}
+.fc-table-list .fc-list-time {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.fc-listGridMonth-view{
+    height: 770px;
+    position: relative;
+}
+.fc-listGridMonth-view .fc-list-calendar-view {
+    position: absolute;
+    height: 100%;
+    width: 210px;
+}
+.fc-listGridMonth-view .fc-list-not-available{
+    width: 100%;
+    position: relative;
+    text-align: center;
+    color: #b2b7bf;
+    padding: 50px 0;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 半透明黑色背景 */
+    z-index: 999;
+    /* 确保遮罩层在所有元素之上 */
+}
+
+/* 对话框的按钮文字 */
+.ui-dialog-buttonset .ui-button-text {
+    color: #004276;
+}
+
+/* 日历上新建事件文字 */
+.fc .fc-day-events-calendar-add {
+    color: #B2B7BF;
+    display: none;
+}
+
+/* 日期信息显示 */
+.fc-list-calendar-view .day-info{
+    padding: 0 12px 46px 25px;
+    line-height: 22px;
+    border-bottom: 1px solid #C3C3C3;
+    zoom: 1;
+}
+.day-info .day-num {
+    line-height: 102px;
+    font-size: 64px;
+}
+
+/* 日历选择器 */
+.ui-datepicker {
+    font-size: 13.6px;
+    /* width: 17em; */
+}
+#dtSelectDate .ui-datepicker,#dtSelectDate .ui-datepicker-calendar {
+    /* width: 15em; */
+    font-size: 12px;
+    background: #F5F5F5;
+    border: none;
+}
+#dtSelectDate .ui-widget-content{
+    border: none;
+    background: none;
+}
+#dtSelectDate .ui-state-default{
+    border: none;
+    background: #F5F5F5;
+    text-align: center;
+}
+#dtSelectDate .ui-state-active{
+    background: #cc0000;
+    color: #fff;
+}
+#dtSelectDate tr td:nth-child(7) {
+    background: #F5F5F5 !important;
+}
+#dtSelectDate .ui-widget-header {
+    border: 1px solid #F5F5F5;
+    background: #F5F5F5;
+}
+#dtSelectDate .ui-widget-header .ui-icon,#dtSelectDate .ui-widget-content .ui-icon {
+}
+#dtSelectDate .ui-state-default-hover {
+    background: #cdcdcd !important;
+    color: #000;
+    text-decoration: none;
+}
+#dtSelectDate .ui-datepicker-calendar .ui-state-default:hover {
+    background: #cdcdcd !important;
+}
+#dtSelectDate .ui-datepicker-calendar .ui-state-active:hover{
+    background: #cc0000 !important;
+}
+
+
+.fleft {
+    float: left;
+}
+
+.ui-dialog .ui-dialog-buttonpane{
+    font-size: 14px;
+}
+.ui-dialog-delbtn {
+    position: absolute;
+    left: 25px;
+}
+.ui-dialog-delbtn .ui-button-text{
+    color: #c00;
+}
+
+/* 重复事件确认对话框 */
+#div_confirm_repeatEvent,#div_confirm_repeatEvent_del{
+    font-size: 14px;
+}
+
+
